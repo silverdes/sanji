@@ -15,7 +15,12 @@
                         
                         <div class="flex items-center px-6 py-3 bg-gray-900">
                             <i class="icofont-cop-badge text-lg text-white"></i>
-                            <h1 class="mx-3 text-lg font-semibold text-white">{{user.role}}</h1>
+                            <h1 class="mx-3 text-lg font-semibold text-white" v-if="user.role==1">
+                                Admin
+                            </h1>
+                            <h1 class="mx-3 text-lg font-semibold text-white" v-if="user.role==0">
+                                User
+                            </h1>
                         </div>
 
                         <div class="px-6 py-4">

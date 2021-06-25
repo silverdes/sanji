@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-lg text-gray-800 leading-tight mb-5">
                 Welcome <span class="text-green-400"> {{$attrs.user.name}} </span>
             
-            <inertia-link class="float-right" :href="route('users.create')" >
+            <inertia-link class="float-right" :href="route('users.create')" v-if="$attrs.permissions.users.create" >
                     <jet-button> 
                         <div class="flex items-center space-x-1">
                             <i class="icofont-plus-square"></i>
@@ -79,7 +79,7 @@
                                                 <i class="icofont-eye"></i>
                                             </inertia-link>
                                             |
-                                            <inertia-link :href="route('users.edit', user.id)" class="text-gray-700 text-lg hover:text-gray-500">
+                                            <inertia-link v-if="user.can.update" :href="route('users.edit', user.id)" class="text-gray-700 text-lg hover:text-gray-500">
                                                 <i class="icofont-edit-alt"></i>
                                             </inertia-link>
                                         </div>

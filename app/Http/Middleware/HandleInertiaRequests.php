@@ -42,7 +42,8 @@ class HandleInertiaRequests extends Middleware
                     $user =$request->user();
                     if($user){
                         return [
-                            'viewAny' => $user->can('viewAny', User::class)
+                            'view' => $user->can('view', User::class),
+                            'create' => $user->can('create', User::class),
                         ];
                     }
                 }
