@@ -52,7 +52,7 @@
                                             <img class="h-10 w-10 rounded-full" :src="user.profile_photo_url" alt="">
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">
+                                            <div class="text-sm font-semibold text-gray-900">
                                             {{user.name}}
                                             </div>
                                             <div class="text-sm text-gray-500">
@@ -62,16 +62,16 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{user.title}}</div>
+                                        <div class="text-sm text-gray-900 font-semibold">{{user.title}}</div>
                                         <div class="text-sm text-gray-500">{{user.sub_title}}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        {{user.status}}
-                                        </span>
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800" v-if="user.status == '1'">Active</span>
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-600" v-else>Pending</span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{user.role}}
+                                        <span v-if="user.role == '1'">Admin</span>
+                                        <span v-else>User</span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div class="flex items-center w-2/3 justify-between">
@@ -110,6 +110,24 @@
         },
         props:{
             users:Object,
+        },
+        computed:{
+            reversedMessage: function () {
+            // `this` points to the vm instance
+            return this.users.map( (id) => {
+                id.role
+                return id
+            })
+            }
+        },
+        methods:{
+            fullName: function(name) {
+                if(name.role != true){
+                    return name.role = "Admin"
+                }else{
+                    return name.role = "User"
+                }
         }
     }
+}
 </script>

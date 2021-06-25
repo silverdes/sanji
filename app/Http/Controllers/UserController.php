@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -72,7 +73,29 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        //dd($request->input('role'));
+        $request->validate([
+            'name' => 'required | min:3',
+            'email' => 'sometimes|email|required',
+            'title' => 'required',
+            'sub_title' => 'required',
+            'role' => 'required',
+            'status' => 'required',
+        ],[
+            'name.required'=>'Title should not be empty',
+            'name.min' => 'The name must be bigger :min characters',
+            'email.email' => 'Should be a valid email',
+        ]);
+
+        $user->update($request->all([
+            'name',
+            'email',
+            'title',
+            'sub_title',
+            'role',
+            'status']
+        ));
+        return back();
     }
 
     /**

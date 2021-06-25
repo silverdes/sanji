@@ -1,93 +1,128 @@
 <template>
-    <app-layout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Add new User
-            </h2>
-        </template>
+<app-layout>
+    <div class="py-12">
+     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+            <jet-form-section class="" @submitted="updateProfileInformation">
+            <template #title>
+                Profile Information
+            </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <form>
-                        <div class="mt-10 sm:mt-0 px-10 py-5">
-                            <div class="md:grid md:grid-cols-3 md:gap-6">
-                                <div class="md:col-span-1">
-                                <div class="px-4 sm:px-0">
-                                    <h3 class="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
-                                    <p class="mt-1 text-sm text-gray-600">
-                                    Use a permanent address where you can receive mail.
-                                    </p>
-                                </div>
-                                </div>
-                                <div class="mt-5 md:mt-0 md:col-span-2">
-                                <form @submit="updateProfileInformation">
-                                    <div class="shadow overflow-hidden sm:rounded-md">
-                                    <div class="px-4 py-5 bg-white sm:p-6">
-                                        <div class="grid grid-cols-6 gap-6">
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="full_name" class="block text-sm font-medium text-gray-700">Full name</label>
-                                                <input v-model="form.full_name" type="text" name="full_name" id="full_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                <jet-input-error :message="form.errors.full_name" class="mt-2" />
+            <template #description>
+                Update your account's profile information and email address.
+            </template>
 
-                                            </div>
-
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="email_address" class="block text-sm font-medium text-gray-700">Email address</label>
-                                                <input v-model="form.email" type="text" name="email_address" id="email_address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            
-                                            <div class="col-span-6 sm:col-span-6">
-                                                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                                                <input v-model="form.password" type="password" name="password" id="password" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-                                                <input v-model="form.title" type="text" name="title" id="title" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-
-                                            <div class="col-span-6 sm:col-span-3">
-                                                <label for="sub_title" class="block text-sm font-medium text-gray-700">Sub Title</label>
-                                                <input v-model="form.sub_title" type="text" name="sub_title" id="sub_title" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-
-                                            <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                                <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
-                                                <input v-model="form.role" type="text" name="role" id="role" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            
-                                            <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                                <input v-model="form.status" type="text" name="status" id="status" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            Save
-                                        </button>
-                                    </div>
-                                    </div>
-                                </form>
-                                </div>
+            <template #form>
+                <!-- Name -->
+                <div class="col-span-6 sm:col-span-3">
+                    <jet-label for="name" value="Name" />
+                        <div class="relative">
+                        <jet-input id="name" type="text" class="mt-1 block w-full" :class="{'border-red-400':form.errors.name}" v-model="form.name" autocomplete="name" />
+                            <div class="absolute bottom-2 right-2">
+                                <i v-if="!form.errors.name" class="icofont-check-circled text-green-400"></i>
+                                <i v-if="form.errors.name" class="icofont-info-circle text-red-400"></i>
                             </div>
                         </div>
-                    </form>
+                    <jet-input-error :message="form.errors.name" class="mt-2" />
                 </div>
-            </div>
+                <!-- Email -->
+                <div class="col-span-6 sm:col-span-3">
+                    <jet-label for="email" value="Email" />
+                    <div class="relative">
+                        <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" :class="{'border-red-400':form.errors.email}" />
+                        <div class="absolute bottom-2 right-2">
+                            <i v-if="!form.errors.email" class="icofont-check-circled text-green-400"></i>
+                            <i v-if="form.errors.email" class="icofont-info-circle text-red-400"></i>
+                        </div>
+                    </div>
+                    <jet-input-error :message="form.errors.email" class="mt-2" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 relative">
+                    <jet-label for="title" value="Title" />
+                    <div class="relative">
+                        <jet-input v-model="form.title" type="text" name="title" id="title" class="mt-1 block w-full" :class="{'border-red-400':form.errors.title}" />
+                        <div class="absolute bottom-2 right-2">
+                            <i v-if="!form.errors.title" class="icofont-check-circled text-green-400"></i>
+                            <i v-if="form.errors.title" class="icofont-info-circle text-red-400"></i>
+                        </div>
+                    </div>
+                    <jet-input-error :message="form.errors.title" class="mt-2" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 relative">
+                    <jet-label for="sub_title" value="Sub Title" />
+                    <div class="relative">
+                        <jet-input v-model="form.sub_title" type="text" name="sub_title" class="mt-1 block w-full" :class="{'border-red-400':form.errors.sub_title}" />
+                        <div class="absolute bottom-2 right-2">
+                            <i v-if="!form.errors.sub_title" class="icofont-check-circled text-green-400"></i>
+                            <i v-if="form.errors.sub_title"  class="icofont-info-circle text-red-400"></i>
+                        </div>
+                    </div>
+                    <jet-input-error :message="form.errors.sub_title" class="mt-2" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-2 relative">
+                    <jet-label for="role" value="Role" />
+                    <div class="flex items-center">
+                        <span class="mr-3">Is he an admin ?</span>
+                        <jet-checkbox :checked="user.role =='1' " v-model="form.role" />
+                    </div>
+                     
+                    <jet-input-error :message="form.errors.role" class="mt-2" />
+                </div>
+                
+                <div class="col-span-6 sm:col-span-3 lg:col-span-2 relative">
+                    <jet-label for="status" value="Status" />
+                    <div class="flex items-center">
+                        <span class="mr-3">Activate the account ?</span>
+                        <jet-checkbox :checked="user.status =='1' " v-model="form.status" />
+                    </div>
+                     <jet-input-error :message="form.errors.status" class="mt-2" />
+                </div>
+            </template>
+
+            <template #actions>
+                <jet-action-message :on="form.recentlySuccessful" class="mr-3">
+                    Saved.
+                </jet-action-message>
+
+                <inertia-link href="/users" class="mx-4 inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-900 focus:ring focus:ring-red-300 disabled:opacity-25 transition" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Cancel
+                </inertia-link>
+                <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Save
+                </jet-button>
+            </template>
+            </jet-form-section>
         </div>
-    </app-layout>
+     </div>
+    </div>
+</app-layout>
 </template>
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
+    import JetButton from '@/Jetstream/Button'
+    import JetFormSection from '@/Jetstream/FormSection'
+    import JetInput from '@/Jetstream/Input'
     import JetInputError from '@/Jetstream/InputError'
+    import JetLabel from '@/Jetstream/Label'
+    import JetActionMessage from '@/Jetstream/ActionMessage'
+    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import JetCheckbox from '@/Jetstream/Checkbox'
 
     export default {
         components: {
             AppLayout,
+            JetActionMessage,
+            JetButton,
+            JetFormSection,
+            JetInput,
             JetInputError,
+            JetLabel,
+            JetSecondaryButton,
+            JetCheckbox,
         },
         props:{
             user:Object,
@@ -96,9 +131,8 @@
             return{
                 form: this.$inertia.form({
                     _method: 'PUT',
-                    full_name:this.user.name,
+                    name:this.user.name,
                     email:this.user.email,
-                    password:this.user.password,
                     title:this.user.title,
                     sub_title:this.user.sub_title,
                     role:this.user.role,
@@ -109,11 +143,10 @@
         },
         methods:{
             updateProfileInformation() {
-                this.form.post(route('users.update'), {
+                this.form.post(route('users.update', this.user.id), {
                     preserveScroll: true,
                 });
             },
-
-        }
-    }
+        },
+}
 </script>

@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\odel=User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -28,7 +27,7 @@ class UserPolicy
      * @param  \App\Models\odel=User  $odel=User
      * @return mixed
      */
-    public function view(User $user, odel=User $odel=User)
+    public function view(User $user, User $model)
     {
         //
     }
@@ -51,7 +50,7 @@ class UserPolicy
      * @param  \App\Models\odel=User  $odel=User
      * @return mixed
      */
-    public function update(User $user, odel=User $odel=User)
+    public function update(User $user, User $model)
     {
         //
     }
@@ -63,7 +62,7 @@ class UserPolicy
      * @param  \App\Models\odel=User  $odel=User
      * @return mixed
      */
-    public function delete(User $user, odel=User $odel=User)
+    public function delete(User $user, User $model)
     {
         //
     }
@@ -75,7 +74,7 @@ class UserPolicy
      * @param  \App\Models\odel=User  $odel=User
      * @return mixed
      */
-    public function restore(User $user, odel=User $odel=User)
+    public function restore(User $user, User $model)
     {
         //
     }
@@ -87,7 +86,7 @@ class UserPolicy
      * @param  \App\Models\odel=User  $odel=User
      * @return mixed
      */
-    public function forceDelete(User $user, odel=User $odel=User)
+    public function forceDelete(User $user, User $model)
     {
         //
     }
