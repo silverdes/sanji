@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->name('dashboard');
+
+
+Route::get('/recipes/index', [RecipeController::class, 'index'])->name('recipes.index');
+Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
+
+Route::get('users/index', [UserController::class, 'index']);
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', function () { return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::resource('users', UserController::class);
+
+});
